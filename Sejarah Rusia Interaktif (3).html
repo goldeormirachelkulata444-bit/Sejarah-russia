@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jejak Sejarah Rusia - Edukasi & Kuis Interaktif</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Playfair Display untuk nuansa klasik-modern -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        rusia: {
+                            navy: '#0f172a',
+                            crimson: '#b91c1c',
+                            gold: '#d97706',
+                            slate: '#1e293b',
+                            light: '#f8fafc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-red-700 selection:text-white">
+
+    <!-- Navigasi Utama -->
+    <nav class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md text-white border-b border-slate-800 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo / Judul -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-red-600 to-amber-500 flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-landmark text-white text-lg"></i>
+                    </div>
+                    <span class="font-serif font-bold text-xl tracking-wide text-white">Historia<span class="text-amber-400">Rusia</span></span>
+                </div>
+
+                <!-- Menu Tab / Navigasi Cepat -->
+                <div class="flex space-x-2 sm:space-x-4">
+                    <button onclick="switchTab('materi')" id="nav-materi" class="px-3 py-2 rounded-lg text-sm font-medium bg-red-700 text-white transition-all duration-200 flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span>Materi Sejarah</span>
+                    </button>
+                    <button onclick="switchTab('kuis')" id="nav-kuis" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-all duration-200 flex items-center gap-2">
+                        <i class="fa-solid fa-brain"></i>
+                        <span>Kuis Interaktif</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-slate-900 text-white overflow-hidden">
+        <!-- Latar Belakang Dekoratif -->
+        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-red-700/20 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-700/20 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-semibold tracking-wider uppercase mb-4">
+                Ensiklopedia Sejarah Dunia
+            </span>
+            <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6 leading-tight">
+                Menelusuri Jejak Panjang <br class="hidden sm:inline" />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-amber-300 to-red-400">Sejarah Peradaban Rusia</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
+                Dari federasi pangeran abad pertengahan di Rus Kiev, kemegahan Tsar Kekaisaran Rusia, revolusi merah Uni Soviet, hingga lahirnya Federasi Rusia modern.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="switchTab('materi'); document.getElementById('konten-utama').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 rounded-xl bg-red-700 hover:bg-red-600 text-white font-semibold shadow-lg shadow-red-900/30 transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                    <i class="fa-solid fa-scroll"></i> Mulai Membaca
+                </button>
+                <button onclick="switchTab('kuis'); document.getElementById('konten-utama').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-semibold transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-question text-amber-400"></i> Uji Pemahamanmu
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main id="konten-utama" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: MATERI SEJARAH                      -->
+        <!-- ========================================== -->
+        <section id="section-materi" class="space-y-12">
+            
+            <!-- Navigasi Cepat Era (Filter/Jump) -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3 px-1">Lompat ke Era Sejarah:</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                    <a href="#era-1" class="p-3 rounded-xl bg-slate-50 hover:bg-red-50 border border-slate-200 hover:border-red-200 transition group">
+                        <span class="block text-xs font-bold text-red-700">882 – 1240</span>
+                        <span class="font-semibold text-sm text-slate-800 group-hover:text-red-800">1. Era Rus Kiev</span>
+                    </a>
+                    <a href="#era-2" class="p-3 rounded-xl bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-200 transition group">
+                        <span class="block text-xs font-bold text-amber-700">1547 – 1917</span>
+                        <span class="font-semibold text-sm text-slate-800 group-hover:text-amber-800">2. Kekaisaran Rusia</span>
+                    </a>
+                    <a href="#era-3" class="p-3 rounded-xl bg-slate-50 hover:bg-red-50 border border-slate-200 hover:border-red-200 transition group">
+                        <span class="block text-xs font-bold text-red-700">1917 – 1991</span>
+                        <span class="font-semibold text-sm text-slate-800 group-hover:text-red-800">3. Revolusi & Uni Soviet</span>
+                    </a>
+                    <a href="#era-4" class="p-3 rounded-xl bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 transition group">
+                        <span class="block text-xs font-bold text-blue-700">1991 – Kini</span>
+                        <span class="font-semibold text-sm text-slate-800 group-hover:text-blue-800">4. Rusia Modern</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Timeline Container -->
+            <div class="relative border-l-4 border-slate-200 ml-3 sm:ml-6 space-y-12 pb-4">
+
+                <!-- ERA 1: RUS KIEV -->
+                <article id="era-1" class="relative pl-6 sm:pl-10 scroll-mt-24">
+                    <!-- Titik Timeline -->
+                    <div class="absolute -left-[14px] top-1 w-6 h-6 rounded-full bg-red-700 border-4 border-slate-50 shadow"></div>
+                    
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden transition hover:shadow-lg">
+                        <div class="bg-gradient-to-r from-slate-900 to-slate-800 px-6 py-4 flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Abad ke-9 hingga ke-13 (882 – 1240 M)</span>
+                                <h2 class="font-serif text-xl sm:text-2xl font-bold text-white">1. Era Rus Kiev (Kievan Rus')</h2>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-medium">Akar Peradaban Slavia Timur</span>
+                        </div>
+                        
+                        <div class="p-6 space-y-4 text-slate-600 leading-relaxed">
+                            <p>
+                                Sejarah negara Rusia berawal dari <strong>Rus Kiev</strong>, sebuah federasi longgar suku-suku Slavia Timur yang berpusat di kota Kiev. Negara ini didirikan oleh <strong>Pangeran Oleg dari Novgorod</strong> pada tahun 882 M setelah menyatukan wilayah utara dan selatan di sepanjang jalur perdagangan sungai dari Skandinavia menuju Kekaisaran Bizantium.
+                            </p>
+                            <div class="grid sm:grid-cols-2 gap-4 pt-2">
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    <h4 class="font-bold text-slate-800 text-sm mb-1 flex items-center gap-2">
+                                        <i class="fa-solid fa-cross text-amber-600"></i> Kristenisasi Rus (988 M)
+                                    </h4>
+                                    <p class="text-sm">Pangeran <strong>Vladimir Agung</strong> mengadopsi Kristen Ortodoks dari Kekaisaran Bizantium sebagai agama resmi, yang kelak membentuk identitas budaya, seni, dan aksara Kiril Rusia.</p>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    <h4 class="font-bold text-slate-800 text-sm mb-1 flex items-center gap-2">
+                                        <i class="fa-solid fa-horse text-red-700"></i> Invasi Bangsa Mongol
+                                    </h4>
+                                    <p class="text-sm">Perpecahan internal melemahkan Rus Kiev, hingga akhirnya dihancurkan oleh invasi Kekaisaran Mongol (Gerombolan Emas) pimpinan Batu Khan pada tahun 1240 M.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ERA 2: KEKAISARAN RUSIA -->
+                <article id="era-2" class="relative pl-6 sm:pl-10 scroll-mt-24">
+                    <div class="absolute -left-[14px] top-1 w-6 h-6 rounded-full bg-amber-600 border-4 border-slate-50 shadow"></div>
+                    
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden transition hover:shadow-lg">
+                        <div class="bg-gradient-to-r from-amber-900 to-red-900 px-6 py-4 flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-amber-300">Abad ke-16 hingga Awal Abad ke-20 (1547 – 1917)</span>
+                                <h2 class="font-serif text-xl sm:text-2xl font-bold text-white">2. Ketsaran & Kekaisaran Rusia</h2>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-medium">Era Dinasti Rurik & Romanov</span>
+                        </div>
+                        
+                        <div class="p-6 space-y-4 text-slate-600 leading-relaxed">
+                            <p>
+                                Setelah melepaskan diri dari kekuasaan Mongol, Keharyapatihan Moskow bangkit menjadi pusat kekuatan baru. Pada tahun 1547, <strong>Ivan IV (Ivan yang Mengerikan)</strong> dinobatkan sebagai <strong>Tsar</strong> (Kaisar) pertama seluruh Rusia. Setelah masa krisis, <strong>Dinasti Romanov</strong> naik takhta pada tahun 1613 dan memerintah selama lebih dari 300 tahun.
+                            </p>
+                            <div class="grid sm:grid-cols-3 gap-4 pt-2">
+                                <div class="bg-amber-50/60 p-4 rounded-xl border border-amber-100">
+                                    <h4 class="font-bold text-slate-800 text-sm mb-1">Pyotr yang Agung</h4>
+                                    <p class="text-xs sm:text-sm">Memodernisasi dan membaratkan Rusia secara besar-besaran, membangun angkatan laut, serta mendirikan ibu kota baru <strong>St. Petersburg</strong> (1703) sebagai "Jendela menuju Eropa".</p>
+                                </div>
+                                <div class="bg-amber-50/60 p-4 rounded-xl border border-amber-100">
+                                    <h4 class="font-bold text-slate-800 text-sm mb-1">Katarina yang Agung</h4>
+                                    <p class="text-xs sm:text-sm">Memimpin Zaman Keemasan Rusia pada abad ke-18, memperluas wilayah kekaisaran hingga Krimea dan Polandia, serta memajukan seni dan ilmu pengetahuan.</p>
+                                </div>
+                                <div class="bg-amber-50/60 p-4 rounded-xl border border-amber-100">
+                                    <h4 class="font-bold text-slate-800 text-sm mb-1">Kemenangan atas Napoleon</h4>
+                                    <p class="text-xs sm:text-sm">Pada tahun 1812, Rusia berhasil memukul mundur invasi pasukan Prancis pimpinan Napoleon Bonaparte menggunakan taktik bumi hangus dan musim dingin ekstrem.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ERA 3: REVOLUSI & UNI SOVIET -->
+                <article id="era-3" class="relative pl-6 sm:pl-10 scroll-mt-24">
+                    <div class="absolute -left-[14px] top-1 w-6 h-6 rounded-full bg-red-600 border-4 border-slate-50 shadow"></div>
+                    
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden transition hover:shadow-lg">
+                        <div class="bg-gradient-to-r from-red-800 to-red-950 px-6 py-4 flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-red-300">Abad ke-20 (1917 – 1991)</span>
+                                <h2 class="font-serif text-xl sm:text-2xl font-bold text-white">3. Revolusi Rusia & Era Uni Soviet (USSR)</h2>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-medium">Negara Komunis Pertama</span>
+                        </div>
+                        
+                        <div class="p-6 space-y-4 text-slate-600 leading-relaxed">
+                            <p>
+                                Kemiskinan parah, ketimpangan sosial, dan kekalahan dalam Perang Dunia I memicu <strong>Revolusi Rusia tahun 1917</strong>. Tsar Nikolai II dipaksa turun takhta, mengakhiri kekuasaan Dinasti Romanov. Kelompok komunis radikal <strong>Bolshevik</strong> yang dipimpin oleh <strong>Vladimir Lenin</strong> merebut kekuasaan dan mendirikan <strong>Uni Soviet (USSR)</strong> pada tahun 1922.
+                            </p>
+                            <div class="grid sm:grid-cols-2 gap-4 pt-2">
+                                <div class="bg-red-50/60 p-4 rounded-xl border border-red-100">
+                                    <h4 class="font-bold text-slate-800 text-sm mb-1 flex items-center gap-2">
+                                        <i class="fa-solid fa-industry text-red-700"></i> Era Stalin & Perang Dunia II
+                                    </h4>
+                                    <p class="text-sm">Di bawah <strong>Joseph Stalin</strong>, Uni Soviet mengalami industrialisasi cepat namun diwarnai penindasan politik. Uni Soviet berperan krusial mengalahkan Nazi Jerman dalam Perang Dunia II (Pertempuran Stalingrad) dengan korban jiwa mencapai lebih dari 20 juta orang.</p>
+                                </div>
+                                <div class="bg-red-50/60 p-4 rounded-xl border border-red-100">
+                                    <h4 class="font-bold text-slate-800 text-sm mb-1 flex items-center gap-2">
+                                        <i class="fa-solid fa-rocket text-red-700"></i> Perang Dingin & Perlombaan Antariksa
+                                    </h4>
+                                    <p class="text-sm">Uni Soviet menjadi negara adidaya yang bersaing dengan Amerika Serikat dalam Perang Dingin. Soviet mencatat sejarah dengan meluncurkan satelit pertama (<em>Sputnik 1</em>, 1957) dan mengirim manusia pertama ke luar angkasa, <strong>Yuri Gagarin</strong> (1961).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ERA 4: FEDERASI RUSIA MODERN -->
+                <article id="era-4" class="relative pl-6 sm:pl-10 scroll-mt-24">
+                    <div class="absolute -left-[14px] top-1 w-6 h-6 rounded-full bg-blue-700 border-4 border-slate-50 shadow"></div>
+                    
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden transition hover:shadow-lg">
+                        <div class="bg-gradient-to-r from-blue-900 to-slate-900 px-6 py-4 flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-blue-300">Akhir Abad ke-20 hingga Sekarang (1991 – Kini)</span>
+                                <h2 class="font-serif text-xl sm:text-2xl font-bold text-white">4. Lahirnya Federasi Rusia Modern</h2>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-medium">Era Pasca-Soviet</span>
+                        </div>
+                        
+                        <div class="p-6 space-y-4 text-slate-600 leading-relaxed">
+                            <p>
+                                Stagnasi ekonomi dan biaya militer yang membengkak mendorong pemimpin terakhir Uni Soviet, <strong>Mikhail Gorbachev</strong>, memperkenalkan kebijakan keterbukaan (<em>Glasnost</em>) dan restrukturisasi ekonomi (<em>Perestroika</em>). Namun, reformasi ini justru memicu gelombang kemerdekaan negara-negara bagian hingga <strong>Uni Soviet resmi bubar pada Desember 1991</strong>.
+                            </p>
+                            <div class="bg-blue-50/60 p-4 rounded-xl border border-blue-100">
+                                <h4 class="font-bold text-slate-800 text-sm mb-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-flag text-blue-700"></i> Transisi Menuju Abad ke-21
+                                </h4>
+                                <p class="text-sm">
+                                    <strong>Boris Yeltsin</strong> menjadi Presiden pertama Federasi Rusia yang beralih dari ekonomi komunis menuju pasar bebas, meski diwarnai krisis ekonomi pada tahun 1990-an. Memasuki tahun 2000, kepemimpinan beralih kepada <strong>Vladimir Putin</strong> yang memusatkan kembali kekuasaan negara, memulihkan stabilitas ekonomi melalui ekspor energi, dan mengembalikan peran aktif Rusia dalam geopolitik global.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Ajakan ke Kuis di Bawah Materi -->
+            <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6 sm:p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+                <div>
+                    <h3 class="font-serif text-2xl font-bold mb-2">Sudah Selesai Membaca Materinya?</h3>
+                    <p class="text-slate-300 text-sm sm:text-base">Uji seberapa jauh pemahamanmu tentang sejarah Rusia lewat 8 soal kuis interaktif lengkap dengan pembahasannya!</p>
+                </div>
+                <button onclick="switchTab('kuis'); document.getElementById('konten-utama').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto whitespace-nowrap px-6 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold shadow-lg transition transform hover:scale-105 flex items-center justify-center gap-2">
+                    <span>Mulai Kuis Sekarang</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: KUIS INTERAKTIF                     -->
+        <!-- ========================================== -->
+        <section id="section-kuis" class="hidden">
+            <div class="max-w-3xl mx-auto">
+                
+                <!-- Header Kuis & Progress Bar -->
+                <div id="quiz-header" class="bg-white rounded-2xl p-6 shadow-md border border-slate-200 mb-6">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-red-700">Evaluasi Pembelajaran</span>
+                            <h2 class="font-serif text-2xl font-bold text-slate-900">Kuis Sejarah Rusia</h2>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span id="question-counter" class="px-3.5 py-1.5 rounded-lg bg-slate-100 text-slate-700 font-semibold text-sm">
+                                Soal 1 dari 8
+                            </span>
+                            <span id="score-badge" class="px-3.5 py-1.5 rounded-lg bg-amber-100 text-amber-800 font-bold text-sm">
+                                Skor: 0
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                        <div id="progress-bar" class="bg-gradient-to-r from-red-600 to-amber-500 h-2.5 rounded-full transition-all duration-300" style="width: 12.5%"></div>
+                    </div>
+                </div>
+
+                <!-- Kartu Soal Kuis -->
+                <div id="quiz-card" class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200">
+                    <!-- Kategori Era Soal -->
+                    <span id="question-era" class="inline-block px-3 py-1 rounded-md bg-slate-100 text-slate-600 text-xs font-semibold mb-3">
+                        Era Rus Kiev
+                    </span>
+                    
+                    <!-- Teks Pertanyaan -->
+                    <h3 id="question-text" class="text-lg sm:text-xl font-bold text-slate-900 mb-6 leading-snug">
+                        Memuat pertanyaan...
+                    </h3>
+
+                    <!-- Daftar Pilihan Jawaban -->
+                    <div id="options-container" class="space-y-3">
+                        <!-- Tombol opsi akan di-render oleh JavaScript -->
+                    </div>
+
+                    <!-- Kotak Umpan Balik / Feedback (Muncul langsung setelah menjawab) -->
+                    <div id="feedback-box" class="hidden mt-6 p-5 rounded-xl border-2 transition-all duration-300">
+                        <div class="flex items-start gap-3.5">
+                            <div id="feedback-icon" class="mt-0.5 text-xl"></div>
+                            <div class="flex-1">
+                                <h4 id="feedback-title" class="font-bold text-base sm:text-lg mb-1"></h4>
+                                <p id="correct-answer-callout" class="text-sm font-semibold mb-2 hidden"></p>
+                                <p id="feedback-explanation" class="text-sm leading-relaxed"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Navigasi Soal Berikutnya -->
+                    <div class="mt-8 flex justify-end">
+                        <button id="next-btn" onclick="nextQuestion()" class="hidden px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold shadow-md transition flex items-center gap-2">
+                            <span id="next-btn-text">Soal Berikutnya</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Layar Hasil Akhir Kuis -->
+                <div id="result-card" class="hidden bg-white rounded-2xl p-8 sm:p-10 shadow-lg border border-slate-200 text-center">
+                    <div id="result-icon-wrapper" class="w-20 h-20 mx-auto rounded-full flex items-center justify-center text-4xl mb-5 shadow-inner">
+                        🏆
+                    </div>
+                    <h2 class="font-serif text-3xl font-bold text-slate-900 mb-2">Kuis Selesai!</h2>
+                    <p id="result-message" class="text-slate-600 max-w-md mx-auto mb-6">
+                        Kamu telah menyelesaikan seluruh pertanyaan mengenai sejarah Rusia.
+                    </p>
+                    
+                    <div class="inline-flex items-center justify-center gap-6 bg-slate-50 border border-slate-200 rounded-2xl px-8 py-5 mb-8">
+                        <div>
+                            <span class="block text-xs font-semibold text-slate-400 uppercase">Jawaban Benar</span>
+                            <span id="final-correct" class="text-3xl font-bold text-emerald-600">0/8</span>
+                        </div>
+                        <div class="w-px h-10 bg-slate-200"></div>
+                        <div>
+                            <span class="block text-xs font-semibold text-slate-400 uppercase">Nilai Akhir</span>
+                            <span id="final-score" class="text-3xl font-bold text-slate-900">0</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button onclick="restartQuiz()" class="px-6 py-3 rounded-xl bg-red-700 hover:bg-red-600 text-white font-semibold shadow-md transition flex items-center gap-2">
+                            <i class="fa-solid fa-rotate-right"></i> Ulangi Kuis
+                        </button>
+                        <button onclick="switchTab('materi')" class="px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold transition flex items-center gap-2">
+                            <i class="fa-solid fa-book-open"></i> Pelajari Materi Lagi
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm">
+            <p class="font-serif text-white font-semibold text-base mb-1">HistoriaRusia — Portal Edukasi Sejarah Interaktif</p>
+            <p>Disusun untuk pembelajaran sejarah dunia secara ringkas, terstruktur, dan menyenangkan.</p>
+        </div>
+    </footer>
+
+    <!-- Logika JavaScript Interaktif -->
+    <script>
+        // ==========================================
+        // DATA PERTANYAAN KUIS SEJARAH RUSIA
+        // ==========================================
+        const quizData = [
+            {
+                era: "Era Rus Kiev (882 – 1240)",
+                question: "Siapakah penguasa Rus Kiev yang mengadopsi agama Kristen Ortodoks dari Kekaisaran Bizantium pada tahun 988 M?",
+                options: [
+                    "Ivan yang Mengerikan",
+                    "Vladimir Agung",
+                    "Pyotr yang Agung",
+                    "Pangeran Oleg"
+                ],
+                correctIndex: 1,
+                explanation: "Pada tahun 988 M, Pangeran Vladimir Agung menjadikan Kristen Ortodoks sebagai agama resmi Rus Kiev. Langkah ini mempererat hubungan dengan Bizantium dan membentuk budaya serta aksara Kiril Rusia."
+            },
+            {
+                era: "Era Rus Kiev (882 – 1240)",
+                question: "Kekuatan asing manakah yang menaklukkan dan menghancurkan federasi Rus Kiev pada tahun 1240 M?",
+                options: [
+                    "Kekaisaran Ottoman",
+                    "Pasukan Swedia",
+                    "Kekaisaran Mongol (Gerombolan Emas)",
+                    "Kekaisaran Romawi Suci"
+                ],
+                correctIndex: 2,
+                explanation: "Perpecahan di antara pangeran-pangeran Rus membuat wilayah tersebut rentan terhadap invasi Kekaisaran Mongol pimpinan Batu Khan pada tahun 1240 M."
+            },
+            {
+                era: "Kekaisaran Rusia (1547 – 1917)",
+                question: "Siapakah penguasa Rusia pertama yang secara resmi menyandang gelar 'Tsar' seluruh Rusia pada tahun 1547?",
+                options: [
+                    "Ivan IV (Ivan yang Mengerikan)",
+                    "Nikolai II",
+                    "Mikhail Romanov",
+                    "Alexander I"
+                ],
+                correctIndex: 0,
+                explanation: "Ivan IV Vasilyevich, yang dijuluki 'Ivan yang Mengerikan' (Ivan Grozny), dinobatkan sebagai Tsar pertama seluruh Rusia pada tahun 1547, menandai lahirnya Ketsaran Rusia."
+            },
+            {
+                era: "Kekaisaran Rusia (1547 – 1917)",
+                question: "Kota manakah yang dibangun oleh Pyotr yang Agung pada tahun 1703 sebagai ibu kota baru dan 'Jendela menuju Eropa'?",
+                options: [
+                    "Moskow",
+                    "Novgorod",
+                    "St. Petersburg",
+                    "Vladivostok"
+                ],
+                correctIndex: 2,
+                explanation: "Pyotr yang Agung membangun St. Petersburg di pesisir Laut Baltik pada tahun 1703 untuk memodernisasi Rusia dan membuka akses perdagangan langsung dengan Eropa Barat."
+            },
+            {
+                era: "Revolusi & Uni Soviet (1917 – 1991)",
+                question: "Kelompok revolusioner komunis yang dipimpin oleh Vladimir Lenin dalam Revolusi Rusia tahun 1917 dikenal dengan nama...",
+                options: [
+                    "Menshevik",
+                    "Bolshevik",
+                    "Tentara Putih",
+                    "Dekabris"
+                ],
+                correctIndex: 1,
+                explanation: "Kaum Bolshevik yang dipimpin oleh Vladimir Lenin berhasil menggulingkan pemerintahan sementara pada Revolusi Oktober 1917 dan mendirikan negara sosialis pertama di dunia."
+            },
+            {
+                era: "Revolusi & Uni Soviet (1917 – 1991)",
+                question: "Siapakah kosmonaut Uni Soviet yang mencatat sejarah sebagai manusia pertama yang melakukan perjalanan ke luar angkasa pada tahun 1961?",
+                options: [
+                    "Neil Armstrong",
+                    "Yuri Gagarin",
+                    "Valentina Tereshkova",
+                    "Alexei Leonov"
+                ],
+                correctIndex: 1,
+                explanation: "Pada 12 April 1961, kosmonaut Soviet Yuri Gagarin mengorbit Bumi menggunakan wahana Vostok 1, menjadi manusia pertama yang berhasil ke luar angkasa."
+            },
+            {
+                era: "Rusia Modern (1991 – Kini)",
+                question: "Apa nama kebijakan keterbukaan politik dan restrukturisasi ekonomi yang diperkenalkan Mikhail Gorbachev menjelang bubarnya Uni Soviet?",
+                options: [
+                    "Glasnost dan Perestroika",
+                    "Duma dan Zemstvo",
+                    "Oprichnina dan Sudebnik",
+                    "Kolkhoz dan Sovkhoz"
+                ],
+                correctIndex: 0,
+                explanation: "Mikhail Gorbachev memperkenalkan 'Glasnost' (keterbukaan informasi/kebebasan berpendapat) dan 'Perestroika' (restrukturisasi ekonomi) pada akhir 1980-an untuk mereformasi Uni Soviet."
+            },
+            {
+                era: "Rusia Modern (1991 – Kini)",
+                question: "Siapakah tokoh yang menjadi Presiden pertama Federasi Rusia setelah Uni Soviet resmi bubar pada tahun 1991?",
+                options: [
+                    "Vladimir Putin",
+                    "Dmitry Medvedev",
+                    "Boris Yeltsin",
+                    "Nikita Khrushchev"
+                ],
+                correctIndex: 2,
+                explanation: "Boris Yeltsin menjabat sebagai Presiden pertama Federasi Rusia (1991–1999) dan memimpin transisi Rusia dari sistem komunis menuju demokrasi dan ekonomi pasar."
+            }
+        ];
+
+        // ==========================================
+        // VARIABEL STATE KUIS
+        // ==========================================
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let hasAnswered = false;
+
+        // ==========================================
+        // FUNGSI NAVIGASI TAB (MATERI vs KUIS)
+        // ==========================================
+        function switchTab(tabName) {
+            const sectionMateri = document.getElementById('section-materi');
+            const sectionKuis = document.getElementById('section-kuis');
+            const navMateri = document.getElementById('nav-materi');
+            const navKuis = document.getElementById('nav-kuis');
+
+            if (tabName === 'materi') {
+                sectionMateri.classList.remove('hidden');
+                sectionKuis.classList.add('hidden');
+                
+                navMateri.className = "px-3 py-2 rounded-lg text-sm font-medium bg-red-700 text-white transition-all duration-200 flex items-center gap-2 shadow-sm";
+                navKuis.className = "px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-all duration-200 flex items-center gap-2";
+            } else {
+                sectionMateri.classList.add('hidden');
+                sectionKuis.classList.remove('hidden');
+                
+                navKuis.className = "px-3 py-2 rounded-lg text-sm font-medium bg-red-700 text-white transition-all duration-200 flex items-center gap-2 shadow-sm";
+                navMateri.className = "px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-all duration-200 flex items-center gap-2";
+            }
+        }
+
+        // ==========================================
+        // FUNGSI RENDER PERTANYAAN KUIS
+        // ==========================================
+        function loadQuestion() {
+            hasAnswered = false;
+            const currentData = quizData[currentQuestionIndex];
+            const totalQuestions = quizData.length;
+
+            // Update Header & Progress Bar
+            document.getElementById('question-counter').textContent = `Soal ${currentQuestionIndex + 1} dari ${totalQuestions}`;
+            document.getElementById('score-badge').textContent = `Skor: ${score}`;
+            const progressPercent = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+            // Update Konten Soal
+            document.getElementById('question-era').textContent = currentData.era;
+            document.getElementById('question-text').textContent = currentData.question;
+
+            // Reset Feedback Box & Tombol Next
+            const feedbackBox = document.getElementById('feedback-box');
+            feedbackBox.classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+
+            // Render Pilihan Jawaban
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            const letters = ['A', 'B', 'C', 'D'];
+
+            currentData.options.forEach((optionText, index) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.id = `option-btn-${index}`;
+                button.onclick = () => selectAnswer(index);
+                button.className = "w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-slate-400 hover:bg-slate-50 transition-all duration-200 flex items-center justify-between group";
+                
+                button.innerHTML = `
+                    <div class="flex items-center gap-3.5">
+                        <span id="option-letter-${index}" class="w-8 h-8 rounded-lg bg-slate-100 group-hover:bg-slate-200 text-slate-700 font-bold text-sm flex items-center justify-center transition-colors">
+                            ${letters[index]}
+                        </span>
+                        <span class="font-medium text-slate-800 text-sm sm:text-base">${optionText}</span>
+                    </div>
+                    <span id="option-status-icon-${index}" class="text-lg"></span>
+                `;
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        // ==========================================
+        // FUNGSI CEK JAWABAN & TAMPILKAN FEEDBACK
+        // ==========================================
+        function selectAnswer(selectedIndex) {
+            if (hasAnswered) return; // Mencegah klik ganda
+            hasAnswered = true;
+
+            const currentData = quizData[currentQuestionIndex];
+            const correctIndex = currentData.correctIndex;
+            const isCorrect = selectedIndex === correctIndex;
+            const letters = ['A', 'B', 'C', 'D'];
+
+            // Nonaktifkan semua tombol opsi dan beri warna penanda
+            currentData.options.forEach((_, idx) => {
+                const btn = document.getElementById(`option-btn-${idx}`);
+                const letterSpan = document.getElementById(`option-letter-${idx}`);
+                const statusIcon = document.getElementById(`option-status-icon-${idx}`);
+
+                btn.disabled = true;
+                btn.classList.remove('hover:border-slate-400', 'hover:bg-slate-50');
+
+                if (idx === correctIndex) {
+                    // Highlight jawaban yang BENAR dengan warna hijau
+                    btn.classList.remove('border-slate-200');
+                    btn.classList.add('border-emerald-500', 'bg-emerald-50/80');
+                    letterSpan.classList.remove('bg-slate-100', 'text-slate-700');
+                    letterSpan.classList.add('bg-emerald-600', 'text-white');
+                    statusIcon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i>';
+                } else if (idx === selectedIndex && !isCorrect) {
+                    // Highlight pilihan user yang SALAH dengan warna merah
+                    btn.classList.remove('border-slate-200');
+                    btn.classList.add('border-red-500', 'bg-red-50/80');
+                    letterSpan.classList.remove('bg-slate-100', 'text-slate-700');
+                    letterSpan.classList.add('bg-red-600', 'text-white');
+                    statusIcon.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-600"></i>';
+                } else {
+                    btn.classList.add('opacity-60');
+                }
+            });
+
+            // Konfigurasi Kotak Feedback (Pemberitahuan Benar / Salah + Jawaban Benar)
+            const feedbackBox = document.getElementById('feedback-box');
+            const feedbackIcon = document.getElementById('feedback-icon');
+            const feedbackTitle = document.getElementById('feedback-title');
+            const correctAnswerCallout = document.getElementById('correct-answer-callout');
+            const feedbackExplanation = document.getElementById('feedback-explanation');
+
+            feedbackBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-300', 'text-emerald-900', 'bg-red-50', 'border-red-300', 'text-red-900');
+
+            if (isCorrect) {
+                score++;
+                document.getElementById('score-badge').textContent = `Skor: ${score}`;
+
+                feedbackBox.classList.add('bg-emerald-50', 'border-emerald-300', 'text-emerald-900');
+                feedbackIcon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i>';
+                feedbackTitle.textContent = "Tepat Sekali! Jawabanmu Benar.";
+                correctAnswerCallout.classList.add('hidden');
+            } else {
+                // JIKA SALAH: Beri tahu bahwa salah, tampilkan jawaban yang benar, dan penjelasannya
+                feedbackBox.classList.add('bg-red-50', 'border-red-300', 'text-red-950');
+                feedbackIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-red-600"></i>';
+                feedbackTitle.textContent = "Kurang Tepat! Jawabanmu Salah.";
+                
+                correctAnswerCallout.classList.remove('hidden');
+                correctAnswerCallout.className = "text-sm font-bold text-emerald-800 bg-emerald-100/80 border border-emerald-200 px-3 py-2 rounded-lg mb-2.5";
+                correctAnswerCallout.innerHTML = `<i class="fa-solid fa-check mr-1.5"></i>Jawaban yang benar adalah: <span class="underline">${letters[correctIndex]}. ${currentData.options[correctIndex]}</span>`;
+            }
+
+            feedbackExplanation.textContent = currentData.explanation;
+
+            // Tampilkan Tombol Soal Berikutnya / Lihat Hasil
+            const nextBtn = document.getElementById('next-btn');
+            const nextBtnText = document.getElementById('next-btn-text');
+            nextBtn.classList.remove('hidden');
+
+            if (currentQuestionIndex === quizData.length - 1) {
+                nextBtnText.textContent = "Lihat Hasil Akhir";
+            } else {
+                nextBtnText.textContent = "Soal Berikutnya";
+            }
+        }
+
+        // ==========================================
+        // FUNGSI NAVIGASI KE SOAL BERIKUTNYA / HASIL
+        // ==========================================
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-header').classList.add('hidden');
+            document.getElementById('quiz-card').classList.add('hidden');
+            
+            const resultCard = document.getElementById('result-card');
+            resultCard.classList.remove('hidden');
+
+            const total = quizData.length;
+            const finalPercentage = Math.round((score / total) * 100);
+
+            document.getElementById('final-correct').textContent = `${score}/${total}`;
+            document.getElementById('final-score').textContent = finalPercentage;
+
+            const resultIcon = document.getElementById('result-icon-wrapper');
+            const resultMessage = document.getElementById('result-message');
+
+            if (finalPercentage >= 80) {
+                resultIcon.innerHTML = '🏆';
+                resultIcon.className = "w-20 h-20 mx-auto rounded-full bg-amber-100 flex items-center justify-center text-4xl mb-5";
+                resultMessage.textContent = "Luar biasa! Pemahamanmu tentang sejarah Rusia sangat mendalam, layaknya seorang sejarawan sejati.";
+            } else if (finalPercentage >= 50) {
+                resultIcon.innerHTML = '👏';
+                resultIcon.className = "w-20 h-20 mx-auto rounded-full bg-blue-100 flex items-center justify-center text-4xl mb-5";
+                resultMessage.textContent = "Kerja bagus! Kamu sudah menguasai sebagian besar peristiwa penting sejarah Rusia. Coba baca kembali materi untuk menyempurnakannya.";
+            } else {
+                resultIcon.innerHTML = '📚';
+                resultIcon.className = "w-20 h-20 mx-auto rounded-full bg-red-100 flex items-center justify-center text-4xl mb-5";
+                resultMessage.textContent = "Jangan menyerah! Sejarah Rusia memang panjang dan kompleks. Yuk, baca kembali ringkasan materinya dan coba kuisnya lagi!";
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            document.getElementById('result-card').classList.add('hidden');
+            document.getElementById('quiz-header').classList.remove('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        // Inisialisasi kuis saat halaman pertama kali dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            loadQuestion();
+        });
+    </script>
+</body>
+</html>
